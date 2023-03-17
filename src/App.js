@@ -1,16 +1,14 @@
-import logo from './logo.svg';
-import './App.css';
-
+import "./App.css";
+import { NativeBaseProvider, Box, Center } from "native-base";
+import DateTime from "./components/time";
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Custom Chrome
-        </p>
-
-      </header>
-    </div>
+    <NativeBaseProvider>
+      <Center paddingTop='20%'>
+        
+        <DateTime />
+      </Center>
+    </NativeBaseProvider>
   );
 }
 
