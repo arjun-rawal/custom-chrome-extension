@@ -13,7 +13,7 @@ export const DateTime = (props) => {
 
   return (
     <div>
-      {props.type === "time" && <p> {date.toLocaleTimeString().slice(0, 4) + date.toLocaleTimeString().slice(7,10)}</p>}
+      {props.type === "time" && <p> {date.toLocaleTimeString().split(':')[0] + ":" +    date.toLocaleTimeString().split(':')[1]+" PM"}</p>}
       {props.type === "date" && <p> {date.toLocaleDateString()}</p>}
     </div>
   );
