@@ -1,0 +1,20 @@
+{
+  "staging": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-customchromeextensio-staging-12830-authRole",
+      "UnauthRoleArn": "arn:aws:iam::680031783851:role/amplify-customchromeextensio-staging-12830-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::680031783851:role/amplify-customchromeextensio-staging-12830-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-customchromeextensio-staging-12830-deployment",
+      "UnauthRoleName": "amplify-customchromeextensio-staging-12830-unauthRole",
+      "StackName": "amplify-customchromeextensio-staging-12830",
+      "StackId": "arn:aws:cloudformation:us-east-1:680031783851:stack/amplify-customchromeextensio-staging-12830/d90dd160-cd07-11ed-a319-122c673280ef",
+      "AmplifyAppId": "d2oianq3om5tcg"
+    },
+    "categories": {
+      "auth": {
+        "customchromeextension": {}
+      }
+    }
+  }
+}
