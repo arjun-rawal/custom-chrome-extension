@@ -44,6 +44,14 @@ function App() {
       >
         <Authenticator />
       </Modal>
+    {/* TODO:
+      Sign in event closes modal and button name changes to sign out which leads to sign out function
+      greeting on sign in
+      amplify storage for quick links
+      loading amplify storage on sign in
+      using local storage if not signed in
+
+    */}
     </MantineProvider>
   );
 }
