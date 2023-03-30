@@ -4,7 +4,7 @@ import { Button, Center, MantineProvider, Modal } from "@mantine/core";
 import DateTime from "./components/dateTime";
 import { Amplify } from "aws-amplify";
 
-import { Authenticator, withAuthenticator } from "@aws-amplify/ui-react";
+import { Authenticator, useAuthenticator, withAuthenticator } from "@aws-amplify/ui-react";
 import "@aws-amplify/ui-react/styles.css";
 
 import awsExports from "./aws-exports";
@@ -13,7 +13,8 @@ Amplify.configure(awsExports);
 
 function App() {
   const [opened, { open, close }] = useDisclosure(false);
-
+  const { authStatus } = useAuthenticator(context => [context.authStatus]);
+console.log(authStatus)
   return (
     <MantineProvider>
       <Button
@@ -34,6 +35,7 @@ function App() {
       >
         <DateTime type="time" />
       </Center>
+      {authStatus !== 'authenticated' &&
       <Modal
         opened={opened}
         onClose={close}
@@ -44,6 +46,7 @@ function App() {
       >
         <Authenticator />
       </Modal>
+    }
     {/* TODO:
       Sign in event closes modal and button name changes to sign out which leads to sign out function
       greeting on sign in
