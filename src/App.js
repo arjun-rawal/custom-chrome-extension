@@ -2,7 +2,7 @@ import "./App.css";
 import { Button, Center, MantineProvider, Modal } from "@mantine/core";
 
 import DateTime from "./components/dateTime";
-import { Amplify } from "aws-amplify";
+import { Amplify, Auth } from "aws-amplify";
 
 import {
   Authenticator,
@@ -43,7 +43,7 @@ function App() {
         </>
       ) : (
         <>
-          <Button style={{ position: "absolute" }} right={15} top={15}>
+          <Button onClick={()=>{Auth.signOut()}} style={{ position: "absolute" }} right={15} top={15}>
             Sign out
           </Button>
         </>
@@ -61,7 +61,7 @@ function App() {
       </Center>
 
       {/* TODO:
-      Sign in event closes modal and button name changes to sign out which leads to sign out function
+      problem with sign in-> browser remembers signed in and authStatus doesn't work which keeps the sign in button
       greeting on sign in
       amplify storage for quick links
       loading amplify storage on sign in
