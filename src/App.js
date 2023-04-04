@@ -1,5 +1,5 @@
 import "./App.css";
-import { Button, Center, MantineProvider, Modal } from "@mantine/core";
+import { Button, Center, MantineProvider, Modal, Box } from "@mantine/core";
 
 import DateTime from "./components/dateTime";
 import { Amplify, Auth } from "aws-amplify";
@@ -18,8 +18,14 @@ Amplify.configure(awsExports);
 function App() {
   const [opened, { open, close }] = useDisclosure(false);
   const { authStatus } = useAuthenticator((context) => [context.authStatus]);
+  console.log(authStatus);
   return (
     <MantineProvider>
+      {authStatus === "authenticated" && (
+        <Box style={{ position: "absolute" }} right={15} top={15}>
+          Loading...
+        </Box>
+      )}
       {authStatus !== "authenticated" ? (
         <>
           <Modal
@@ -43,7 +49,14 @@ function App() {
         </>
       ) : (
         <>
-          <Button onClick={()=>{Auth.signOut()}} style={{ position: "absolute" }} right={15} top={15}>
+          <Button
+            onClick={() => {
+              Auth.signOut();
+            }}
+            style={{ position: "absolute" }}
+            right={15}
+            top={15}
+          >
             Sign out
           </Button>
         </>
