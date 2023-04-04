@@ -1,6 +1,5 @@
 import "./App.css";
-import { Button, Center, MantineProvider, Modal, Box } from "@mantine/core";
-
+import { Button, Center, MantineProvider, Modal, Box, Blockquote } from "@mantine/core";
 import DateTime from "./components/dateTime";
 import { Amplify, Auth } from "aws-amplify";
 
@@ -13,12 +12,31 @@ import "@aws-amplify/ui-react/styles.css";
 
 import awsExports from "./aws-exports";
 import { useDisclosure } from "@mantine/hooks";
+import { useEffect, useState } from "react";
 Amplify.configure(awsExports);
 
 function App() {
   const [opened, { open, close }] = useDisclosure(false);
   const { authStatus } = useAuthenticator((context) => [context.authStatus]);
-  console.log(authStatus);
+  const [data,setData]=useState([]);
+  const getData=()=>{
+    fetch('quotes.json'
+    ,{
+
+    }
+    )
+      .then(function(response){
+        console.log(response)
+        return response.json();
+      })
+      .then(function(myJson) {
+        console.log(myJson);
+        setData(myJson)
+      });
+  }
+  useEffect(()=>{
+    getData()
+  },[])
   return (
     <MantineProvider>
       {authStatus === "authenticated" && (
@@ -72,7 +90,11 @@ function App() {
       >
         <DateTime type="time" />
       </Center>
-
+      <Blockquote>
+      {
+       data && data.length>0 && data.map((item)=><p>{item.Quote}</p>)
+     }
+      </Blockquote>
       {/* TODO:
       problem with sign in-> browser remembers signed in and authStatus doesn't work which keeps the sign in button
       greeting on sign in
