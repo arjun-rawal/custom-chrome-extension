@@ -38,7 +38,8 @@ function App() {
     getData()
   },[])
   return (
-    <MantineProvider>
+    <MantineProvider >
+      <body>
       {authStatus === "authenticated" && (
         <Box style={{ position: "absolute" }} right={15} top={15}>
           Loading...
@@ -103,6 +104,7 @@ function App() {
       using local storage if not signed in
 
     */}
+    </body>
     </MantineProvider>
   );
 }
