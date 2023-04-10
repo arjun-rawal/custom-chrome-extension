@@ -18,25 +18,34 @@ Amplify.configure(awsExports);
 function App() {
   const [opened, { open, close }] = useDisclosure(false);
   const { authStatus } = useAuthenticator((context) => [context.authStatus]);
-  const [data,setData]=useState([]);
-  const getData=()=>{
-    fetch('quotes.json'
-    ,{
-
+  const [data,setData]=useState();
+  var link = "https://api.api-ninjas.com/v1/quotes"
+  async function FetchQuote() {
+    try {
+      const quoteObject = await fetch(
+        link
+      ,{
+        headers: {
+          "X-Api-Key": "NE9j9kpzz9wwNpgxBhT5XA==NYRboJ18ccCs5Ecq"
+        }
+      }
+      )
+      console.log(link)
+      const json = await quoteObject.json();
+      console.log(json);
+      setData('"' + json[0].quote + '"\n -' + json[0].author);
+    } catch (error) {
+      console.log(error.message);
     }
-    )
-      .then(function(response){
-        console.log(response)
-        return response.json();
-      })
-      .then(function(myJson) {
-        console.log(myJson);
-        setData(myJson)
-      });
   }
-  useEffect(()=>{
-    getData()
-  },[])
+  useEffect(() => {
+
+    FetchQuote();
+  }, []);
+
+
+
+
   return (
     <MantineProvider >
       <body>
@@ -92,9 +101,10 @@ function App() {
         <DateTime type="time" />
       </Center>
       <Blockquote>
-      {
+      {/* {
        data && data.length>0 && data.map((item)=><p>{item.Quote}</p>)
-     }
+     } */}
+     {data}
       </Blockquote>
       {/* TODO:
       problem with sign in-> browser remembers signed in and authStatus doesn't work which keeps the sign in button
