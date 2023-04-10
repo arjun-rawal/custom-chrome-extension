@@ -33,7 +33,7 @@ function App() {
       console.log(link)
       const json = await quoteObject.json();
       console.log(json);
-      setData('"' + json[0].quote + '"\n -' + json[0].author);
+      setData(json[0]);
     } catch (error) {
       console.log(error.message);
     }
@@ -100,14 +100,13 @@ function App() {
       >
         <DateTime type="time" />
       </Center>
-      <Blockquote>
-      {/* {
-       data && data.length>0 && data.map((item)=><p>{item.Quote}</p>)
-     } */}
-     {data}
-      </Blockquote>
+      {data &&
+      <Blockquote cite={"-"+data.author}>
+
+     {data.quote}
+      </Blockquote> //TODO: calls twice for some reason
+}
       {/* TODO:
-      problem with sign in-> browser remembers signed in and authStatus doesn't work which keeps the sign in button
       greeting on sign in
       amplify storage for quick links
       loading amplify storage on sign in
