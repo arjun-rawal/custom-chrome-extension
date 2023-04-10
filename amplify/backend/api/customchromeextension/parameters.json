@@ -1,0 +1,11 @@
+{
+  "AppSyncApiName": "customchromeextension",
+  "DynamoDBBillingMode": "PAY_PER_REQUEST",
+  "DynamoDBEnableServerSideEncryption": false,
+  "AuthCognitoUserPoolId": {
+    "Fn::GetAtt": [
+      "authcustomchromeextension",
+      "Outputs.UserPoolId"
+    ]
+  }
+}

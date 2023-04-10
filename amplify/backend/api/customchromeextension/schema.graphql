@@ -1,0 +1,4 @@
+type Tasks @model @auth(rules: [{allow: owner}]) {
+  id: ID!
+  task: String
+}
