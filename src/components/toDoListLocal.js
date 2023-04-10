@@ -1,22 +1,50 @@
 import { Box, Button, Center, Flex, Grid, Stack, TextInput } from "@mantine/core";
 import { IconListDetails,IconArrowNarrowDown} from "@tabler/icons-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { DataStore } from '@aws-amplify/datastore';
+import { Tasks } from '../models';
 
-function ToDoList(props) {
+function ToDoListLocal(props) {
   const [tasks,setTasks] = useState([])
   const [value, setValue] = useState('');
-
+  const [storeMode, setStoreMode] = useState('local')
   function newTask(){
     if (value.length !==0){
       let temp = [value]
       setTasks([...tasks,temp])
       setValue("")
+      if (props.type == 'authenticated'){
+      storeTask(value);
+      }
     }
+  }
+  async function storeTask(task){
+    await DataStore.save(
+      new Tasks({
+      "task": task
+    })
+  );
+  }
+  useEffect(() => {
+    console.log(props)
+    if (props.type === 'authenticated'){
+      loadTasks();
+  }
+  }, []);
+
+
+  async function loadTasks(){
+    const models = await DataStore.query(Tasks);
+    console.log(models);
+    setTasks([...tasks,models[0].task])
+
   }
   const listItems = tasks.map((task) =>
   <li key={task}>
     {task}
   </li>
+
+
 );
   return (
     <Box style={{ width: props.width, position: "absolute", right: "10pt", bottom:0 }}>
@@ -41,4 +69,4 @@ function ToDoList(props) {
     </Box>
   );
 }
-export default ToDoList;
+export default ToDoListLocal;

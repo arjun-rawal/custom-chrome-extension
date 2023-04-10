@@ -20,13 +20,15 @@ import "@aws-amplify/ui-react/styles.css";
 import awsExports from "./aws-exports";
 import { useDisclosure } from "@mantine/hooks";
 import { useEffect, useState } from "react";
-import ToDoList from "./components/toDoList";
+import ToDoListAuth from "./components/toDoListAuth";
+import ToDoListLocal from "./components/toDoListLocal";
 Amplify.configure(awsExports);
 
 function App() {
   const [opened, { open, close }] = useDisclosure(false);
   const { authStatus } = useAuthenticator((context) => [context.authStatus]);
   const { user } = useAuthenticator((context) => [context.user]);
+    
   console.log(user);
   const [data, setData] = useState();
   var link = "https://api.api-ninjas.com/v1/quotes";
@@ -77,6 +79,7 @@ function App() {
             >
               Sign in
             </Button>
+            <ToDoListLocal width='25%'/>
           </>
         ) : (
           <>
@@ -100,6 +103,8 @@ function App() {
                 </p>
               </Box>
             </Center>
+
+            <ToDoListAuth width='25%'/>
           </>
         )}
 
@@ -119,7 +124,6 @@ function App() {
           </Center> //TODO: calls twice for some reason
         )}
 
-        <ToDoList width="25%"/>
         {/* TODO:
       amplify storage for quick links
       loading amplify storage on sign in
