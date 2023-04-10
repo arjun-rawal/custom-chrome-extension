@@ -119,7 +119,7 @@ function App() {
           </Center> //TODO: calls twice for some reason
         )}
 
-        <ToDoList width="500px"/>
+        <ToDoList width="25%"/>
         {/* TODO:
       amplify storage for quick links
       loading amplify storage on sign in

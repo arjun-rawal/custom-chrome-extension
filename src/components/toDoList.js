@@ -19,7 +19,7 @@ function ToDoList(props) {
   </li>
 );
   return (
-    <Box style={{ width: props.width, position: "absolute", right: "10pt" }}>
+    <Box style={{ width: props.width, position: "absolute", right: "10pt", bottom:0 }}>
       <Center>To Do List</Center>
       <Flex direction="row" justify='flex-end' gap={10} align="flex-start">
  
