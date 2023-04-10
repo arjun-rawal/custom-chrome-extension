@@ -1,71 +1,76 @@
-import { Box, Button, Center, Flex, Grid, Stack, TextInput } from "@mantine/core";
-import { IconListDetails,IconArrowNarrowDown} from "@tabler/icons-react";
+import {
+  Box,
+  Button,
+  Center,
+  Flex,
+  Grid,
+  Stack,
+  TextInput,
+} from "@mantine/core";
+import { IconListDetails, IconArrowNarrowDown } from "@tabler/icons-react";
 import { useEffect, useState } from "react";
-import { DataStore } from '@aws-amplify/datastore';
-import { Tasks } from '../models';
+import { DataStore } from "@aws-amplify/datastore";
+import { Tasks } from "../models";
 
 function ToDoListAuth(props) {
-  const [tasks,setTasks] = useState([])
-  const [value, setValue] = useState('');
-  function newTask(){
-    if (value.length !==0){
-      let temp = [value]
-      setTasks([...tasks,temp])
-      setValue("")
+  const [tasks, setTasks] = useState([]);
+  const [value, setValue] = useState("");
+  function newTask() {
+    if (value.length !== 0) {
+      let temp = [value];
+      setTasks([...tasks, temp]);
+      setValue("");
       storeTask(value);
-      
     }
   }
-  async function storeTask(task){
+  async function storeTask(task) {
     await DataStore.save(
       new Tasks({
-      "task": task
-    })
-  );
+        task: task,
+        email: props.email,
+      })
+    );
   }
   useEffect(() => {
-  
-      loadTasks();
-  
+    loadTasks();
   }, []);
 
-
-  async function loadTasks(){
-    const models = await DataStore.query(Tasks);
+  async function loadTasks() {
+    const models = await DataStore.query(Tasks, (c)=> c.email.eq(props.email));
     console.log(models);
     var authList = [];
-    for (var i =0; i<models.length;i++){
-      authList.push(models[i].task)
+    for (var i = 0; i < models.length; i++) {
+      authList.push(models[i].task);
     }
-    setTasks([...tasks,...authList])
-
+    setTasks([...tasks, ...authList]);
   }
-  const listItems = tasks.map((task) =>
-  <li key={task}>
-    {task}
-  </li>
-
-
-);
+  const listItems = tasks.map((task) => <li key={task}>{task}</li>);
   return (
-    <Box style={{ width: props.width, position: "absolute", right: "10pt", bottom:0 }}>
+    <Box
+      style={{
+        width: props.width,
+        position: "absolute",
+        right: "10pt",
+        bottom: 0,
+      }}
+    >
       <Center>To Do List</Center>
-      <Flex direction="row" justify='flex-end' gap={10} align="flex-start">
- 
+      <Flex direction="row" justify="flex-end" gap={10} align="flex-start">
         <TextInput
           icon={<IconListDetails />}
           size="sm"
           placeholder="Task"
           variant="filled"
-          style={{width:'100%'}}
-          value={value} onChange={(event) => setValue(event.currentTarget.value)}
+          style={{ width: "100%" }}
+          value={value}
+          onChange={(event) => setValue(event.currentTarget.value)}
         />
         <Button onClick={newTask}>
-          <IconArrowNarrowDown/>
+          <IconArrowNarrowDown />
         </Button>
       </Flex>
       <Grid columns={5}>
-      <ul>{listItems}</ul>
+        <ul>{listItems}</ul>
       </Grid>
     </Box>
   );

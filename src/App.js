@@ -104,7 +104,7 @@ function App() {
               </Box>
             </Center>
 
-            <ToDoListAuth width='25%'/>
+            <ToDoListAuth width='25%' email={user.attributes.email}/>
           </>
         )}
 
