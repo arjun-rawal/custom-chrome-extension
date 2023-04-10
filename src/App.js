@@ -26,7 +26,7 @@ function App() {
   const [opened, { open, close }] = useDisclosure(false);
   const { authStatus } = useAuthenticator((context) => [context.authStatus]);
   const { user } = useAuthenticator((context) => [context.user]);
-
+  console.log(user);
   const [data, setData] = useState();
   var link = "https://api.api-ninjas.com/v1/quotes";
   async function FetchQuote() {
@@ -94,7 +94,9 @@ function App() {
                 style={{ position: "absolute", fontWeight: "bold" }}
                 bottom={10}
               >
-                Hello {user.username}!
+                <p style={{ fontSize: "15pt" }}>
+                  Hello {user.attributes.name.split(" ")[0]}!
+                </p>
               </Box>
             </Center>
           </>
