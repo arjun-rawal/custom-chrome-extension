@@ -18,6 +18,8 @@ Amplify.configure(awsExports);
 function App() {
   const [opened, { open, close }] = useDisclosure(false);
   const { authStatus } = useAuthenticator((context) => [context.authStatus]);
+  const { user } = useAuthenticator((context) => [context.user]);
+
   const [data,setData]=useState();
   var link = "https://api.api-ninjas.com/v1/quotes"
   async function FetchQuote() {
@@ -87,6 +89,11 @@ function App() {
           >
             Sign out
           </Button>
+          <Center>
+          <Box  style={{position:"absolute",fontWeight:'bold'}}  bottom={10}>
+            Hello {user.username}!
+          </Box>
+          </Center>
         </>
       )}
 
@@ -105,14 +112,16 @@ function App() {
 
      {data.quote}
       </Blockquote> //TODO: calls twice for some reason
+
+      
 }
       {/* TODO:
-      greeting on sign in
       amplify storage for quick links
       loading amplify storage on sign in
       using local storage if not signed in
 
     */}
+
     </body>
     </MantineProvider>
   );
