@@ -4,7 +4,6 @@ import {
   Center,
   Flex,
   Grid,
-  Stack,
   TextInput,
 } from "@mantine/core";
 import { IconListDetails, IconArrowNarrowDown } from "@tabler/icons-react";
@@ -15,13 +14,12 @@ import { Tasks } from "../models";
 function ToDoListLocal(props) {
   const [tasks, setTasks] = useState([]);
   const [value, setValue] = useState("");
-  const [storeMode, setStoreMode] = useState("local");
   function newTask() {
     if (value.length !== 0) {
       let temp = [value];
       setTasks([...tasks, temp]);
       setValue("");
-      if (props.type == "authenticated") {
+      if (props.type === "authenticated") {
         storeTask(value);
       }
     }

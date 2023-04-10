@@ -13,7 +13,6 @@ import { Amplify, Auth } from "aws-amplify";
 import {
   Authenticator,
   useAuthenticator,
-  withAuthenticator,
 } from "@aws-amplify/ui-react";
 import "@aws-amplify/ui-react/styles.css";
 
