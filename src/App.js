@@ -20,6 +20,7 @@ import "@aws-amplify/ui-react/styles.css";
 import awsExports from "./aws-exports";
 import { useDisclosure } from "@mantine/hooks";
 import { useEffect, useState } from "react";
+import ToDoList from "./components/toDoList";
 Amplify.configure(awsExports);
 
 function App() {
@@ -117,12 +118,15 @@ function App() {
             <Blockquote cite={"-" + data.author}>{data.quote}</Blockquote>{" "}
           </Center> //TODO: calls twice for some reason
         )}
+
+        <ToDoList width="500px"/>
         {/* TODO:
       amplify storage for quick links
       loading amplify storage on sign in
       using local storage if not signed in
 
     */}
+
       </body>
     </MantineProvider>
   );
