@@ -53,7 +53,7 @@ function ToDoListAuth(props) {
         bottom: 0,
       }}
     >
-      <Center><p style={{fontSize:"16px", fontFamily:"Inter"}}>To Do List</p></Center>
+      <Center><p className="font-link" style={{fontSize:"16px"}}>To Do List</p></Center>
       <Flex direction="row" justify="flex-end" gap={10} align="flex-start">
         <TextInput
           icon={<IconListDetails />}

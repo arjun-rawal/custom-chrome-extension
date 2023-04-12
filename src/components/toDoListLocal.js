@@ -53,7 +53,7 @@ function ToDoListLocal(props) {
         bottom: 0,
       }}
     >
-      <Center>To Do List</Center>
+      <Center><p className="font-face-inter">To Do List </p></Center>
       <Flex direction="row" justify="flex-end" gap={10} align="flex-start">
         <TextInput
           icon={<IconListDetails />}

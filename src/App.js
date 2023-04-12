@@ -97,7 +97,7 @@ function App() {
                 style={{ position: "absolute", fontWeight: "bold" }}
                 bottom={10}
               >
-                <p style={{ fontSize: "15pt", fontFamily: "Inter" }}>
+                <p style={{ fontSize: "15pt"}} className="font-face-inter">
                   Hello {user.attributes.name.split(" ")[0]}!
                 </p>
               </Box>
@@ -108,18 +108,19 @@ function App() {
         )}
 
         <Center
-          style={{ fontSize: "30px", fontWeight: "bold", fontFamily: "Inter" }}
+          style={{ fontSize: "30px", fontWeight: "bold" }} className="font-face-inter"
         >
           <DateTime type="date" />
         </Center>
         <Center
-          style={{ fontFamily: "Inter", fontSize: "50px", marginTop: "13%" }}
+          style={{  fontSize: "50px", marginTop: "13%" }}
+          className="font-face-inter"
         >
           <DateTime type="time" />
         </Center>
         {data && (
           <Center >
-            <Blockquote style={{fontFamily: "Inter"}} cite={"-" + data.author}>{data.quote}</Blockquote>{" "}
+            <Blockquote className="font-face-inter" cite={"-" + data.author}>{data.quote}</Blockquote>{" "}
           </Center> //TODO: calls twice for some reason
         )}
 
